@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="link-list">
+  <!--右边友情链接-->
+  <div class="container-fluid links-inner-container col-md-3 col-xs-12">
+    <div class="links card">
+      <div class="card-header">
+        <h3>友情链接</h3>
+      </div>
+      <div class="card-body">
+        <ul class="link-group">
+          <li th:each="link : ${ links }" class="list-group-item">
+            <a th:href="${ link.linkUrl }" th:text="${ link.linkName }" target="_blank"></a>
+          </li>
+          <li class="list-group-item">
+            <a href="mailto:xuyang9978@gamil.com" target="_blank">申请添加友链</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</html>

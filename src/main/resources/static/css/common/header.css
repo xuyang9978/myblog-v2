@@ -1,0 +1,19 @@
+.header {
+  border-bottom: 1px solid #999;
+  font-size: 1.8rem;
+}
+
+.nav-container {
+  padding-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    font-size: 1.3rem;
+    padding: 0 0;
+  }
+}
+
+.navigation {
+  background-color: transparent;
+}

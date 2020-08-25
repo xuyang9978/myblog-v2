@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>徐杨的个人网站</title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+  <link rel="icon" th:href="@{ /img/favicon.ico }" type="image/x-icon">
+  <meta name="description" content=""/>
+  <meta name="keywords" content=""/>
+  <script th:src="@{ /js/home/skel.min.js }"></script>
+  <script th:src="@{ /js/home/init.js }"></script>
+  <noscript>
+    <link rel="stylesheet" th:href="@{ /css/home/skel.css }"/>
+    <link rel="stylesheet" th:href="@{ /css/home/style.css }"/>
+    <link rel="stylesheet" th:href="@{ /css/home/style-wide.css }"/>
+    <link rel="stylesheet" th:href="@{ /css/home/style-noscript.css }"/>
+  </noscript>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b67b9aa7e86f80cc057e72e6f28ab96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</head>
+<body class="loading">
+<div id="wrapper">
+  <div id="bg"></div>
+  <div id="overlay"></div>
+  <div id="main">
+
+    <header id="header">
+      <h1>Xu Yang</h1>
+      <p>一位热爱编程，全靠自学的Java程序猿</p>
+      <div><a th:href="@{ /blog }" style="color: aqua;">我的博客</a></div>
+      <nav>
+        <ul>
+          <li><a href="https://twitter.com/XYOUNG233" class="fa fa-twitter"><span>Twitter</span></a></li>
+          <li><a href="https://weibo.com/u/5236006209" class="fa fa-weibo"><span>Web</span></a></li>
+          <li><a href="https://github.com/xuyang9978" class="fa fa-github"><span>Github</span></a></li>
+          <li><a href="mailto:xuyang9978@gmail.com" class="fa fa-envelope-o"><span>Email</span></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <footer id="footer">
+            <span class="copyright">
+                <a href="http://www.beian.miit.gov.cn" target="_blank">蜀ICP备19034326号-2</a>
+            </span>
+      &nbsp;|&nbsp;
+      <span class="copyright">
+		 		<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=51010802000833"><img
+          th:src="@{ /img/home/beian.png }"/>川公网安备 51010802000833号</a>
+		 	</span>
+    </footer>
+  </div>
+</div>
+</body>
+<script>
+  let _PageHeight = document.documentElement.clientHeight,
+    _PageWidth = document.documentElement.clientWidth;
+  let _LoadingTop = _PageHeight > 61 ? (_PageHeight - 61) / 2 : 0,
+    _LoadingLeft = _PageWidth > 215 ? (_PageWidth - 215) / 2 : 0;
+  let _LoadingHtml = '<div id="loadingDiv" style="position:absolute;left:0;width:100%;height:' + _PageHeight + 'px;top:0;background:#f3f3d3;opacity:1;filter:alpha(opacity=80);z-index:10000;"><div style="position: absolute; cursor1: wait; left: ' + _LoadingLeft + 'px; top:' + _LoadingTop + 'px; width: auto; height: 57px; line-height: 57px; padding-left: 50px; padding-right: 5px; background: transparent; color: #696969; font-family:\'Microsoft YaHei\';">loading...</div></div>';
+  document.write(_LoadingHtml);
+  document.onreadystatechange = completeLoading;
+
+  function completeLoading() {
+    if (document.readyState === "complete") {
+      let loadingMask = document.getElementById('loadingDiv');
+      loadingMask.parentNode.removeChild(loadingMask);
+    }
+  }
+</script>
+
+</html>

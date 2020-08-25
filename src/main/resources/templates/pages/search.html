@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link th:href="@{ /css/blog/more-article.css }" rel="stylesheet">
+  <link rel="icon" th:href="@{ /img/favicon.ico }" type="image/x-icon">
+  <script th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+  <script th:src="@{ /plugins/bootstrap/js/bootstrap.min.js }"></script>
+
+  <title>搜索结果-徐杨的博客</title>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b67b9aa7e86f80cc057e72e6f28ab96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</head>
+<body>
+
+<div class="container outer-container">
+
+  <!--header-->
+  <header class="header container col-md-12 col-sm-12">
+    <!--导航区-->
+    <div class="container nav-container col-md-9 col-sm-12">
+      <ol class="breadcrumb navigation">
+        <li><a href="index" class="active">首页</a></li>
+        <li><a href="blog" class="active">博客</a></li>
+        <li>搜索结果</li>
+      </ol>
+    </div>
+  </header>
+
+  <!-- 左边内容区 -->
+  <div class="container-fluid content-inner-container col-md-8 col-xs-12">
+
+    <!-- 搜索结果列表 -->
+    <div class="container articles-inner-container col-xs-12">
+      <!-- 如果搜索条件为空则随机显示一篇文章 -->
+      <div th:if="${ randomOneArticle ne null }">
+        <div class="container-fluid latest-inner-container col-xs-12">
+          <h2>为您随机推荐一篇文章:</h2>
+          <div class="random-one-article card">
+            <div class="card-header">
+              <h2><a th:href="@{ '/article?aid=' + ${ randomOneArticle.aid }}" class="latest-one-title"
+                     th:text="${ randomOneArticle.title }"></a></h2>
+            </div>
+            <!--            <div class="single-cutting-line"></div>-->
+            <div class="card-body">
+              <p class="brief-introduction" th:text="${ intro }"></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a th:href="@{ '/article?aid=' + ${ randomOneArticle.aid }}" class="continue-read">>>继续阅读全文</a>
+              <div class="single-cutting-line"></div>
+              <p class="latest-article-info">
+                <span th:text="${ #dates.format(randomOneArticle.createdTime, 'yyyy年MM月dd日') }"></span>
+                <span class="delimiter">|</span>
+                <span class="category">分类:
+                  <a th:href="@{ '/category?cid=' + ${ randomOneArticle.cid }}"
+                     th:text="${ randomOneArticle.category.categoryName }">
+                  </a>
+                </span>
+                <span class="delimiter">|</span>
+                <span class="author">作者:<span th:text="${ randomOneArticle.author }"></span></span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 如果查询关键字不为空且有相匹配的文章 -->
+      <div th:if="${ randomOneArticle eq null }">
+        <div th:if="${ titleMatchedArticles.size() != 0 }">
+          <h2 th:text="${ '标题与关键字 ' + keywords  + ' 有关的文章有 '} + ${ titleMatchedArticles.size()  + ' 篇:' }"></h2>
+          <div class="list-group">
+            <ul>
+              <li th:each="article : ${ titleMatchedArticles }"
+                  class="list-group-item article-list">
+                <span th:text="${ #dates.format(article.createdTime, 'yyyy年MM月dd日') + ' » ' }"></span>
+                <a th:href="@{ '/article?aid=' + ${ article.aid }}" th:text="${ article.title }"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div th:if="${ authorMatchedArticles.size() != 0 }">
+          <h2 th:text="${ '作者与关键字 ' + keywords  + ' 有关的文章有 ' } + ${ authorMatchedArticles.size()  + ' 篇:'}"></h2>
+          <div class="list-group">
+            <ul>
+              <li th:each="article : ${ authorMatchedArticles }"
+                  class="list-group-item article-list">
+                <span
+                  th:text="${ #dates.format(article.createdTime, 'yyyy年MM月dd日') + ' » ' + '作者:'} + ${ article.author  + ' » ' }"></span>
+                <a th:href="@{ '/article?aid=' + ${ article.aid }}" th:text="${ article.title }"></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 如果有搜索条件但是没有任何匹配的文章 -->
+      <div
+        th:if="${ randomOneArticle eq null
+        and titleMatchedArticles.size() == 0
+        and authorMatchedArticles.size() == 0 }">
+        <h2 th:text="${ '对不起,没有找到任何与关键字 ' + keywords  + ' 有关的文章.' }"></h2>
+        <img th:src="@{/img/blog/cat.png}" alt="cat cry"/>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container right-inner-container col-md-4 col-xs-12">
+
+    <!-- 右边搜索区 -->
+    <div class="container search-inner-container col-md-12 col-xs-12">
+      <!-- 搜索框 -->
+      <div th:replace="pages/common/search :: search"></div>
+    </div>
+
+    <!-- 分类区域 -->
+    <div class="container category-inner-container col-md-12 col-xs-12">
+      <div th:replace="pages/common/category-list :: category-list"></div>
+    </div>
+  </div>
+  <!--页脚信息-->
+  <div th:replace="pages/common/footer :: myfooter"></div>
+</div>
+</body>
+</html>

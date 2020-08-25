@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" th:href="@{ /img/favicon.ico }" type="image/x-icon">
+  <link th:href="@{ /css/blog/article.css }" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{ /plugins/gitalk/css/gitalk.css }">
+  <script th:src="@{ /plugins/gitalk/js/gitalk.js }"></script>
+  <script th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+  <script th:src="@{ /plugins/bootstrap/js/bootstrap.min.js }"></script>
+  <link rel="stylesheet" th:href="@{ /plugins/editormd/css/editormd.min.css }"/>
+  <link rel="stylesheet" th:href="@{ /plugins/editormd/css/editormd.preview.min.css }"/>
+
+  <title th:text="${ article.title } + '-徐杨的博客'"></title>
+
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b67b9aa7e86f80cc057e72e6f28ab96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</head>
+<body>
+<div class="container outer-container">
+
+  <!--header-->
+  <header class="header container">
+    <!--导航区-->
+    <div class="container nav-container">
+      <ol class="breadcrumb navigation">
+        <li><a href="index" class="active">首页</a></li>
+        <li><a href="blog" class="active">博客</a></li>
+        <li>
+          <a th:href="@{ '/category?cid='+ ${ article.cid }}"
+             th:text="${ article.category.categoryName }"
+             class="active">
+          </a>
+        </li>
+        <li>文章</li>
+      </ol>
+    </div>
+  </header>
+
+  <!--中间内容+留言+评论区-->
+  <div class="container content-inner-container">
+    <!--内容区域-->
+    <div class="content-area">
+      <div class="title">
+        <h2 th:text="${ article.title }"></h2>
+        <span class="category">分类:
+          <a th:href="@{ '/category?cid='+ ${  article.cid }}"
+             th:text="${ article.category.categoryName }">
+          </a>
+        </span>
+      </div>
+      <div class="single-cutting-line"></div>
+      <div class="article-info">
+        <div class="author">原作者:<span th:text="${ article.author }"></span></div>
+        <div class="pubtime">时间:
+          <span>
+            <a
+              th:href="@{ '/category?cid='+ ${ article.cid } + '#' + ${ #dates.format(article.createdTime, 'yyyy') }}"
+              th:text="${ #dates.format(article.createdTime, 'yyyy.MM.dd') }">>
+            </a>
+          </span>
+        </div>
+      </div>
+      <!--      <div id="content" class="mdl-cell mdl-card mdl-cell&#45;&#45;12-col mdl-shadow&#45;&#45;2dp content">-->
+      <!--        <textarea style="display:none;" name="editormd-markdown-doc" th:text="${ article.content }"></textarea>-->
+      <!--      </div>-->
+      <div class="content" id="content" th:utext="${ article.htmlContent }"></div>
+    </div>
+    <!--文章转载声明-->
+    <div class="statement"><span>(全文完)</span><span>注:转载请注明原作者!</span></div>
+
+    <!--上一篇/下一篇-->
+    <div class="container-fluid">
+      <div class="prev-article col-md-6 col-xs-12">上一篇:
+        <span th:if="${ prevArticle eq null }" th:text="前面没有啦"></span>
+        <a th:if="${ prevArticle ne null }" th:href="@{ '/article?aid=' + ${ prevArticle.aid }}"
+           th:text="${ prevArticle.title }"></a>
+      </div>
+      <div class="next-article col-md-6 col-xs-12">下一篇:
+        <span th:if="${ nextArticle eq null }" th:text="后面没有啦"></span>
+        <a th:if="${ nextArticle ne null }" th:href="@{ '/article?aid=' + ${ nextArticle.aid }}"
+           th:text="${ nextArticle.title }"></a>
+      </div>
+    </div>
+    <div class="single-cutting-line"></div>
+
+    <!--发表评论区-->
+    <div class="comment">
+      <!--Gitalk插件-->
+      <div id="gitalk-container"></div>
+    </div>
+
+
+    <!--页脚信息-->
+    <div th:replace="pages/common/footer :: myfooter"></div>
+  </div>
+</div>
+
+<script th:src="@{ /plugins/editormd/editormd.js }"></script>
+<script th:src="@{ /plugins/editormd/lib/marked.min.js }"></script>
+<script th:src="@{ /plugins/editormd/lib/prettify.min.js }"></script>
+<script th:src="@{ /js/utils.js }"></script>
+
+<!--<script type="text/javascript">-->
+<!--  $(function () {-->
+<!--    editormd.markdownToHTML("content");-->
+<!--  });-->
+<!--</script>-->
+
+<script>
+  // 截取字符串
+  let title = location.pathname + "/" + getQueryString("aid");
+  let gitalk = new Gitalk({
+    clientID: '申请的应用 id',
+    clientSecret: '申请的应用密钥',
+    repo: '仓库名',
+    owner: 'github 用户名',
+    admin: ['github 用户名'],
+    id: title,      // 请确保你的 location 连接小于 50 个字符，否则，插件会生成失败
+    distractionFreeMode: true  // 专注模式(全屏遮罩)
+  });
+  gitalk.render('gitalk-container')
+</script>
+</body>
+</html>
+

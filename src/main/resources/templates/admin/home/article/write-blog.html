@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>编写博客</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" th:href="@{ /plugins/editormd/css/editormd.min.css }"/>
+  <link rel="stylesheet" th:href="@{ /plugins/layui/layui/css/layui.css }" media="all">
+</head>
+<body>
+<div id="app">
+  <div class="layui-form" lay-filter="layuiadmin-app-form-list" id="layuiadmin-app-form-list"
+       style="padding: 20px 30px 0 0;">
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章标题</label>
+      <div class="layui-input-inline">
+        <input type="text" name="title" id="title" placeholder="请输入标题" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章作者</label>
+      <div class="layui-input-inline">
+        <input type="text" name="author" id="author" placeholder="请输入作者" autocomplete="off"
+               class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章分类</label>
+      <div class="layui-input-inline">
+        <select name="category" id="category">
+          <option value="">请选择分类</option>
+          <option th:each="category: ${ allCategories }"
+                  th:value="${ category.cid }"
+                  th:text="${ category.categoryName }">
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">文章内容</label>
+      <div class="layui-input-block">
+        <div id="my-editormd">
+          <textarea style="display:none;" name="content" id="content"></textarea>
+          <!-- 第二个隐藏文本域，用来构造生成的HTML代码，方便表单POST提交，这里的name可以任意取，后台接受时以这个name键为准 -->
+          <textarea class="editormd-html-textarea" name="htmlContent" id="htmlContent"></textarea>
+        </div>
+      </div>
+      <label class="layui-form-label"></label>
+      <div class="layui-input-inline">
+        <button onclick="submit()" class="layui-btn" id="submit">发布博客</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" th:src="@{ /js/utils.js }"></script>
+<script th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+<script th:src="@{ /plugins/layui/layui/layui.js }"></script>
+<script th:src="@{ /plugins/editormd/editormd.js }"></script>
+<script th:inline="none" th:src="@{ /js/admin/article/write-blog.js }"></script>
+</body>
+</html>
+
+

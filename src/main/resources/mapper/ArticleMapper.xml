@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="run.xuyang.myblogv2.mapper.ArticleMapper">
+  <!-- 根据 文章id 批量删除 文章 -->
+  <delete id="batchDeleteArticle" parameterType="java.util.List">
+    delete from article where aid in
+    <foreach item="aid" index="index" collection="list" open="(" separator="," close=")">
+      #{aid}
+    </foreach>
+  </delete>
+</mapper>

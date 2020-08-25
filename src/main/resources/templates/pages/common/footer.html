@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="myfooter">
+  <!--页脚信息-->
+  <footer class="footer container-fluid col-md-12 col-xs-12">
+    <div class="info-container col-md-4 col-xs-12">
+      <div class="card-header info-header"><h3>关注我</h3></div>
+      <div class="card-body info-body">
+        <ul class="focus-me">
+          <li><a href="https://github.com/xuyang9978" target="_blank"><img
+            th:src="@{ /img/blog/github.png }" alt="Github">Github</a></li>
+          <li><a href="https://twitter.com/XYOUNG233" target="_blank"><img
+            th:src="@{ /img/blog/twitter.png }" alt="Twitter">Twitter</a></li>
+          <li><a href="https://www.weibo.com/u/5236006209" target="_blank"><img
+            th:src="@{ /img/blog/web.png }" alt="Sina Web">Web</a></li>
+          <li><a href="https://space.bilibili.com/190316154" target="_blank"><img
+            th:src="@{ /img/blog/bilibili.png }" alt="Bilibili">Bilibili</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-container col-md-4 col-xs-12">
+      <div class="card-header info-header"><h3>联系我</h3></div>
+      <div class="card-body info-body">
+        <ul class="contact">
+          <li><p><img th:src="@{ /img/blog/email.png }" alt="email"><a
+            href="mailto:xuyang9978@gamil.com"
+            target="_blank">邮件联系</a>
+          </p></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>
+</html>

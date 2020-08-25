@@ -1,0 +1,87 @@
+<!--这是文章分类页面-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href="@{ /css/blog/category.css }" rel="stylesheet">
+  <link rel="icon" th:href="@{ /img/favicon.ico }" type="image/x-icon">
+  <script th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+  <script th:src="@{ /plugins/bootstrap/js/bootstrap.min.js }"></script>
+
+  <title th:text="${ '分类: ' + curCategory.categoryName + '-徐杨的博客' }"></title>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b67b9aa7e86f80cc057e72e6f28ab96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</head>
+<body>
+<div class="container outer-container">
+
+  <!--header-->
+  <header class="header container">
+    <!--导航区-->
+    <div class="container nav-container">
+      <ol class="breadcrumb navigation">
+        <li><a th:href="@{ /index }" class="active">首页</a></li>
+        <li><a th:href="@{ /blog }" class="active">博客</a></li>
+        <li th:text="${ curCategory.categoryName }"></li>
+      </ol>
+    </div>
+  </header>
+
+  <!--左边展示分类下的所有文章-->
+  <div class="container category-list-inner-container col-md-8 col-xs-12">
+    <!--显示该页面的分类信息-->
+    <div class="category-border">
+      <span>分类: </span><span id="category" th:text="${ curCategory.categoryName }"></span> (共
+      <span id="article-quantity" th:text="${ curCategory.articles.size() }"></span>篇文章)
+    </div>
+
+
+    <div class="category-article-list">
+      <!--显示该分类下的所有文章信息, 按照年份倒序排序,并且每一篇文章后面显示留言数@具体日期-->
+      <div th:each="yearArticlesMap : ${ articlesPerYear }">
+        <h2 class="year" th:href="@{ '#' + ${ yearArticlesMap.key }}" th:text="${ yearArticlesMap.key + '年' }"></h2>
+        <div class="list-group">
+          <ul>
+            <li class="list-group-item article" th:each="article : ${ yearArticlesMap.value }">
+              <a th:href="@{ '/article?aid=' + ${ article.aid }}" th:text="${ article.title }"></a>
+              <span class="article-data" th:text="${ '(' + #dates.format(article.createdTime, 'yyyy.MM.dd') + ')' }"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--右边展示分类列表-->
+  <div class="container right-inner-container col-md-4 col-xs-12">
+
+    <!--右边搜索区-->
+    <div class="container search-inner-container col-md-12 col-xs-12">
+      <!--搜索框-->
+      <div th:replace="pages/common/search :: search"></div>
+    </div>
+
+    <!-- 分类区域 -->
+    <div class="container category-inner-container col-md-12 col-xs-12">
+      <div th:replace="pages/common/category-list :: category-list"></div>
+    </div>
+  </div>
+
+
+  <!--页脚信息-->
+  <div th:replace="pages/common/footer :: myfooter"></div>
+</div>
+
+</body>
+</html>

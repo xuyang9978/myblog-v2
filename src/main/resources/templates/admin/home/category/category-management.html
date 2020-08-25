@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8">
+  <title>分类列表</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" th:href="@{ /plugins/layui/layui/css/layui.css }">
+  <link rel="stylesheet" th:href="@{ /plugins/layui/style/admin.css }">
+  <script type="text/javascript" th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+</head>
+<body>
+<div class="layui-card">
+  <div class="layui-card-body">
+    <table class="layui-table">
+      <div>
+        <table class="layui-hide" id="category-table" lay-filter="category-table"></table>
+      </div>
+    </table>
+  </div>
+  <input th:value="${ user.uid }" style="display: none" id="uid"/>
+</div>
+
+<script th:src="@{ /plugins/layui/layui/layui.js }"></script>
+<script type="text/html" id="operation-bar">
+  <a sec:authorize="hasAnyAuthority('ADMIN', 'EDITOR')" class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+  <a sec:authorize="hasAnyAuthority('ADMIN', 'DELETE')" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+</script>
+<script type="text/html" id="toolbar">
+  <div class="layui-btn-container">
+    <button sec:authorize="hasAnyAuthority('ADMIN', 'WRITER')" class="layui-btn layui-btn-sm" lay-event="add">添加分类</button>
+    <button sec:authorize="hasAnyAuthority('ADMIN', 'DELETE')" class="layui-btn layui-btn-sm" lay-event="batch-del">删除分类</button>
+  </div>
+</script>
+<script id="switchTpl" type="text/html">
+  <input type="checkbox" name="deleted" value="{{ d.cid }}" lay-skin="switch" lay-text="开启|关闭" lay-filter="deleted"
+         {{ d.deleted== 0 ? "checked" : "" }}>
+</script>
+<script th:inline="none" th:src="@{ /js/admin/category/category-management.js }"></script>
+</body>
+</html>
+
+

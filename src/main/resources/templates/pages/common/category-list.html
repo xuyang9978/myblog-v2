@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="category-list">
+  <div class="category-card card">
+    <div class="card-header">
+      <h3>分类</h3>
+    </div>
+    <div class="card-body">
+      <ul class="category-group">
+        <li class="list-group-item category-item" th:each="category : ${ categories }">
+          <a th:href="@{'/category?cid=' + ${ category.cid }}" th:text="${ category.categoryName }"
+             target="_blank"></a>
+          (<span th:text="${ category.articles.size() }"></span>)
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,0 +1,113 @@
+/*文章详情页面所需样式*/
+/*BootStrap*/
+@import "../../plugins/bootstrap/css/bootstrap.min.css";
+/*自定义样式*/
+@import "../common/common.css";
+@import "../common/header.css";
+@import "../common/footer.css";
+@import "../base.css";
+
+
+body {
+  font-size: 1.8rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 1.6rem;
+  }
+}
+
+.title {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .title h2 {
+    font-size: 2rem;
+  }
+}
+
+.article-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+@media (max-width: 768px) {
+  .article-info {
+    font-size: 1.5rem;
+  }
+}
+
+.author span {
+  color: black;
+}
+
+.prev-article, .next-article {
+  font-size: 1.8rem;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+.prev-article {
+  text-align: left;
+}
+
+.next-article {
+  text-align: right;
+}
+
+@media (max-width: 991px) {
+  .prev-article, .next-article {
+    text-align: center;
+  }
+}
+
+.statement {
+  font-size: 2rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .content img {
+    height: auto;
+    width: auto \9;
+    width: 100%;
+  }
+}
+
+img {
+  border: 0.3em solid rgb(224, 223, 204);
+  border-image-source: initial;
+  border-image-slice: initial;
+  border-image-width: initial;
+  border-image-outset: initial;
+  border-image-repeat: initial;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  max-width: 95%;
+}
+
+@media (max-width: 48rem) {
+  img {
+    overflow: auto;
+    border: .15em solid #e0dfcc;
+  }
+}
+
+ul li {
+  list-style-type: square;
+}
+
+ol li {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  border-bottom: 1px solid #d3d3d3;
+}

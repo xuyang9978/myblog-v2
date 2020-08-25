@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="latest-article">
+  <!--最新的一篇文章-->
+  <div class="container-fluid latest-inner-container col-xs-12">
+    <div class="latest-one-article">
+      <h2><a th:href="@{ '/article?aid=' + ${ latestArticle.aid }}" class="latest-one-title"
+             th:text="${ latestArticle.title }"></a></h2>
+      <div class="single-cutting-line"></div>
+      <p class="brief-introduction" th:text="${ intro }"></p>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a th:href="@{ '/article?aid=' + ${ latestArticle.aid }}" class="continue-read">>>继续阅读全文</a>
+      <div class="single-cutting-line"></div>
+      <p class="latest-article-info">
+        <span th:text="${ #dates.format(latestArticle.createdTime, 'yyyy年MM月dd日') }"></span>
+        <span class="delimiter">|</span>
+        <span class="category">分类:
+            <a th:href="@{ '/category?cid=' + ${ latestArticle.cid }}"
+               th:text="${ latestArticle.category.categoryName }">
+            </a>
+          </span>
+      </p>
+    </div>
+  </div>
+</div>
+</html>

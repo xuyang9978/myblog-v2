@@ -1,0 +1,50 @@
+/*分类页面样式文件*/
+/*BootStrap*/
+@import "../../plugins/bootstrap/css/bootstrap.min.css";
+/*搜索框样式文件*/
+@import "../home/font-awesome.min.css";
+@import "../common/search-style.css";
+/*自定义样式文件*/
+@import "../common/header.css";
+@import "../common/common.css";
+@import "../common/footer.css";
+@import "../common/card.css";
+@import "../base.css";
+
+
+.category-border {
+  font-size: 2rem;
+  border: 1px solid #777;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  background-color: #aad2f0;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .category-border {
+    font-size: 1.5rem;
+  }
+}
+
+#category {
+  color: #555;
+}
+
+.article {
+  background-color: transparent;
+}
+
+.article a, .category-item a {
+  text-decoration: underline;
+  color: #333;
+}
+
+.category-inner-container {
+  margin-top: 1rem;
+}
+
+.category-item {
+  background-color: transparent;
+}

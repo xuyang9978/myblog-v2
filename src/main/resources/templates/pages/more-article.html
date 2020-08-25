@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href="@{ /css/blog/more-article.css }" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="icon" th:href="@{ /img/favicon.ico }" type="image/x-icon">
+  <script th:src="@{ /plugins/jquery/jquery-3.2.1.min.js }"></script>
+  <script th:src="@{ /plugins/bootstrap/js/bootstrap.min.js }"></script>
+
+
+  <title>更多文章-徐杨的博客</title>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?7b67b9aa7e86f80cc057e72e6f28ab96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+</head>
+<body>
+
+<div class="container outer-container">
+
+  <!--header-->
+  <header class="header container col-md-12 col-sm-12">
+    <!--导航区-->
+    <div class="container nav-container col-md-9 col-sm-12">
+      <ol class="breadcrumb navigation">
+        <li><a href="index" class="active">首页</a></li>
+        <li><a href="blog" class="active">博客</a></li>
+        <li>更多文章</li>
+      </ol>
+    </div>
+  </header>
+
+  <!--左边内容区-->
+  <div class="container content-inner-container col-md-9 col-xs-12">
+
+    <!--最新的一篇文章-->
+    <div th:replace="pages/common/latest-article :: latest-article"></div>
+
+
+    <!--最近文章列表-->
+    <div class="container articles-inner-container col-xs-12">
+      <div class="latest-article-list">
+        <h3>所有文章(共<span class="article-quantity" th:text="${ articleCount }"></span>篇)</h3>
+        <div class="single-cutting-line"></div>
+        <div class="list-group">
+          <ul>
+            <li th:each="article : ${ articles }"
+                class="list-group-item article-list">
+              <span th:text="${ #dates.format(article.createdTime, 'yyyy年MM月dd日') + ' » ' }"></span>
+              <a th:href="@{ '/article?aid=' + ${ article.aid }}" th:text="${ article.title }"></a>
+              <span>(分类:
+                <span th:text="${ article.category.categoryName }"></span>)
+              </span>
+            </li>
+          </ul>
+          <nav aria-label="page navigation">
+            <ul class="pagination">
+              <!-- 总页数 -->
+              <li class="disabled"><span th:text="'共 ' + ${ totalPage } + ' 页'"></span></li>
+              <!-- 上一页 -->
+              <li th:class="${ articlePageDTO.page == 1 } ? 'disabled' : ''">
+                <span th:if="${ articlePageDTO.page == 1 }" aria-hidden="true">&laquo;</span>
+                <a th:unless="${ articlePageDTO.page == 1 }"
+                   th:href="@{ '/more-article?page=' + ${ articlePageDTO.page - 1 }}">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <!-- 页码 -->
+              <li th:each="page : ${ #numbers.sequence(1, totalPage) }"
+                  th:class="${ page == articlePageDTO.page } ? 'active' : ''">
+                <a th:href="@{'/more-article?page=' + ${ page }}">
+                  <span th:text="${ page }"></span>
+                </a>
+              </li>
+              <!-- 上一页 -->
+              <li th:class="${ articlePageDTO.page == totalPage } ? 'disabled' : ''">
+                <span th:if="${ articlePageDTO.page == totalPage }" aria-hidden="true">&raquo;</span>
+                <a th:unless="${ articlePageDTO.page == totalPage }"
+                   th:href="@{'/more-article?page=' + ${ articlePageDTO.page + 1 }}">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--右边搜索区-->
+  <div class="container search-inner-container col-md-3 col-xs-12">
+    <!--搜索框-->
+    <div th:replace="pages/common/search :: search"></div>
+  </div>
+
+  <!--右边分类列表-->
+  <div class="container category-inner-container col-md-3 col-xs-12">
+    <div th:replace="pages/common/category-list :: category-list"></div>
+  </div>
+
+  <!--页脚信息-->
+  <div th:replace="pages/common/footer :: myfooter"></div>
+</div>
+</body>
+</html>

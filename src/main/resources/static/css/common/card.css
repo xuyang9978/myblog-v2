@@ -1,0 +1,49 @@
+.card {
+  border: 1px solid #333;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.card .card-header {
+  padding: .5rem 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.card .card-body {
+  padding: 1rem;
+}
+
+.info-body .focus-me, .contact, .support {
+  padding-left: 2rem;
+}
+
+.info-body span {
+  color: #333;
+}
+
+.info-container {
+  margin-right: 5rem;
+}
+
+.link-group li {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 2rem;
+  background-color: transparent;
+  text-align: center;
+  list-style-type: none;
+}
+
+.data-group li {
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #ddd;
+  font-size: 2rem;
+  background-color: transparent;
+  text-align: left;
+  list-style-type: none;
+}
