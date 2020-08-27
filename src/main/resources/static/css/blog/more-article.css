@@ -1,15 +1,1 @@
-/*博客首页更多文章页面所需要的样式文件*/
-@import "blog.css";
-
-.category-item a {
-  text-decoration: underline;
-  color: #333;
-}
-
-.category-inner-container {
-  margin-top: 1rem;
-}
-
-.category-item {
-  background-color: transparent;
-}
+@import "blog.css";.category-item a{text-decoration:underline;color:#333}.category-inner-container{margin-top:1rem}.category-item{background-color:transparent}
