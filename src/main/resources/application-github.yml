@@ -1,0 +1,40 @@
+# 发布到 Github 上的环境
+# 配置 Tomcat 端口
+server:
+  port: 8864
+# 配置 MySQL 连接信息
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_blog?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: # 用户名
+    password: # 登录密码
+  # thymeleaf 配置
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+    # 关闭缓存，用于即时刷新，上线生产环境时改为 true
+    cache: false
+  # redis 配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+mybatis-plus:
+  configuration:
+    # 配置 mybatis-plus 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  type-aliases-package: run.xuyang.blogadmin.entity
+  type-aliases-super-type: java.lang.Object
+  # xml 文件位置
+  mapper-locations: classpath:mapper/*Mapper.xml
+
+# 七牛云 配置
+qiniu:
+  accessKey: # 七牛云空间 accessKey
+  secretKey: # 七牛云空间密钥
+  bucket: # 七牛云空间名
+  path: # 七牛云空间外链域名
